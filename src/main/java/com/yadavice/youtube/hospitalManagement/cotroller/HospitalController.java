@@ -1,0 +1,21 @@
+package com.yadavice.youtube.hospitalManagement.cotroller;
+
+import com.yadavice.youtube.hospitalManagement.dto.DoctorResponseDto;
+import com.yadavice.youtube.hospitalManagement.service.DoctorService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/public")
+@RequiredArgsConstructor
+public class HospitalController {
+
+    private final DoctorService doctorService;
+    public ResponseEntity<List<DoctorResponseDto>> getAllDoctors(){
+        return ResponseEntity.ok(doctorService.getAllDoctors());
+    }
+}
