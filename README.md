@@ -7,6 +7,10 @@ The application follows modern backend best practices including **JWT-based auth
 
 ---
 
+## ERD Diagram
+
+![ERD Diagram](./images/erd-hms.png)
+
 ## 🛠️ Tech Stack
 
 - **Java**
@@ -28,3 +32,5 @@ The application follows modern backend best practices including **JWT-based auth
 ### ✅ JWT Token-Based Authentication
 - Stateless authentication using JSON Web Tokens
 - Tokens are sent in the `Authorization` header
+
+
