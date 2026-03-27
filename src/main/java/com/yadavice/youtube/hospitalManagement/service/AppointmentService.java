@@ -35,7 +35,7 @@ public class AppointmentService {
         Doctor doctor = doctorRepository.findById(doctorId)
                 .orElseThrow(() -> new EntityNotFoundException("Doctor Not found"));
 
-        Patient patient = patientRepository.findById(doctorId)
+        Patient patient = patientRepository.findById(patientId)
                 .orElseThrow(() -> new EntityNotFoundException("Patient Not found"));
 
         Appointment appointment = Appointment.builder()

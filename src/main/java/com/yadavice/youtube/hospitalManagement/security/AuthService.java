@@ -10,7 +10,6 @@ import com.yadavice.youtube.hospitalManagement.entity.type.AuthProviderType;
 import com.yadavice.youtube.hospitalManagement.entity.type.RoleType;
 import com.yadavice.youtube.hospitalManagement.repository.PatientRepository;
 import com.yadavice.youtube.hospitalManagement.repository.UserRepository;
-import com.yadavice.youtube.hospitalManagement.security.AuthUtil;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +22,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -44,7 +44,8 @@ public class AuthService {
 
         String token = authUtil.generateAccessToken(user);
 
-        return new LoginResponseDto(token, user.getId());
+        Set<String> roles = user.getRoles().stream().map(Enum::name).collect(Collectors.toSet());
+        return new LoginResponseDto(token, user.getId(), roles);
     }
 
     public User signUpInternal(SignupRequestDto signupRequestDto, AuthProviderType authProviderType, String providerId) {
@@ -105,7 +106,8 @@ public class AuthService {
             throw new BadCredentialsException("This email is already registered with provider "+emailUser.getProviderType());
         }
 
-        LoginResponseDto loginResponseDto = new LoginResponseDto(authUtil.generateAccessToken(user), user.getId());
+        Set<String> roles = user.getRoles().stream().map(Enum::name).collect(Collectors.toSet());
+        LoginResponseDto loginResponseDto = new LoginResponseDto(authUtil.generateAccessToken(user), user.getId(), roles);
         return ResponseEntity.ok(loginResponseDto);
     }
 }
