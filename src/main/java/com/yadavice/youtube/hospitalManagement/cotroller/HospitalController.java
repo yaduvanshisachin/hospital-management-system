@@ -18,6 +18,6 @@ public class HospitalController {
     private final DoctorService doctorService;
     @GetMapping("/doctors")
     public ResponseEntity<List<DoctorResponseDto>> getAllDoctors(){
-        return ResponseEntity.ok(doctorService.getAllDoctors());
+        return ResponseEntity.ok(doctorService.getAllDoctors(0, 10));
     }
 }

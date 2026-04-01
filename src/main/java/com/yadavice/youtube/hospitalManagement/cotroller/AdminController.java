@@ -24,13 +24,13 @@ public class AdminController {
     @GetMapping("/patients")
     public ResponseEntity<List<PatientResponseDto>> getAllPatients(
             @RequestParam(value = "page", defaultValue = "0") Integer pageNumber,
-            @RequestParam(value = "size", defaultValue = "10") Integer pageSize
-    ){
+            @RequestParam(value = "size", defaultValue = "10") Integer pageSize) {
         return ResponseEntity.ok(patientService.getAllPatients(pageNumber, pageSize));
     }
 
     @PostMapping("/onBoardNewDoctor")
-    public ResponseEntity<DoctorResponseDto> onBoardNewDoctor(@Valid @RequestBody OnboardDoctorRequestDto onboardDoctorRequestDto) {
+    public ResponseEntity<DoctorResponseDto> onBoardNewDoctor(
+            @Valid @RequestBody OnboardDoctorRequestDto onboardDoctorRequestDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(doctorService.onBoardNewDoctor(onboardDoctorRequestDto));
     }
 }

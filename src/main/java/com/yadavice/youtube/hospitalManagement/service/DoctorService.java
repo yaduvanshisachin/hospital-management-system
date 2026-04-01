@@ -25,13 +25,12 @@ public class DoctorService {
     private final ModelMapper modelMapper;
     private final UserRepository userRepository;
 
-    public List<DoctorResponseDto> getAllDoctors() {
+    public List<DoctorResponseDto> getAllDoctors(Integer pageNumber, Integer pageSize) {
         return doctorRepository.findAll()
                 .stream()
                 .map(doctor -> modelMapper.map(doctor, DoctorResponseDto.class))
                 .collect(Collectors.toList());
     }
-
 
     @Transactional
     public DoctorResponseDto onBoardNewDoctor(OnboardDoctorRequestDto onBoardDoctorRequestDto) {
